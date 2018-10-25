@@ -12,9 +12,9 @@ total_number_of_certified_occupants = 0.0
 fname = sys.argv[1]
 
 def sort_by_value_for_occupations_dictionary(key):
-    return occupations_dictionary[key]
+    return (occupations_dictionary[key], key)
 def sort_by_value_for_state_dictionary(key):
-    return state_dictionary[key]
+    return (state_dictionary[key], key)
 
 with open(fname) as csvfile:
     reader = csv.DictReader(csvfile, delimiter=';')
