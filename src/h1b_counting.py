@@ -77,6 +77,7 @@ f.close()
 f2 = open(sys.argv[3], "w+")
 f2.write("TOP_STATES;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
 for i in range(len(top_10_states)):
+    print top_10_states[i], top_10_states_number_of_certified_applicants[i], top_10_states_percentages[i]
     f2.write("%s;%d;%s\n" % (top_10_states[i], top_10_states_number_of_certified_applicants[i], top_10_states_percentages[i]))
 f2.close()
         
