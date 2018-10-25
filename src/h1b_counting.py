@@ -18,17 +18,22 @@ def sort_by_value_for_state_dictionary(key):
 
 with open(fname) as csvfile:
     reader = csv.DictReader(csvfile, delimiter=';')
+    header = reader.next()
+    if "STATUS" in header:
+        header = ['STATUS', 'LCA_CASE_SOC_NAME', 'LCA_CASE_EMPLOYER_STATE']
+    else:
+        header = ['CASE_STATUS', 'SOC_NAME', 'EMPLOYER_STATE']
     for row in reader:
-        if row['STATUS'] == 'CERTIFIED':
+        if row[header[0]] == 'CERTIFIED':
             total_number_of_certified_occupants += 1
-            if row['LCA_CASE_SOC_NAME'] not in occupations_dictionary:
-                occupations_dictionary[row['LCA_CASE_SOC_NAME']] = 1
+            if row[header[1]] not in occupations_dictionary:
+                occupations_dictionary[row[header[1]]] = 1
             else:
-                occupations_dictionary[row['LCA_CASE_SOC_NAME']] += 1
-            if row['LCA_CASE_EMPLOYER_STATE'] not in state_dictionary:
-                state_dictionary[row['LCA_CASE_EMPLOYER_STATE']] = 1
+                occupations_dictionary[row[header[1]]] += 1
+            if row[header[2]] not in state_dictionary:
+                state_dictionary[row[header[2]]] = 1
             else:
-                state_dictionary[row['LCA_CASE_EMPLOYER_STATE']] += 1
+                state_dictionary[row[header[2]]] += 1
 keylist_occupations = occupations_dictionary.keys()
 keylist_occupations.sort(reverse=True, key=sort_by_value_for_occupations_dictionary)
 
