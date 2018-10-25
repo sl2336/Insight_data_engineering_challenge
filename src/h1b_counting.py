@@ -56,7 +56,7 @@ else:
     for occupation in keylist_occupations:
         top_10_occupations.append(occupation)
         top_10_occupations_number_of_certified_applicants.append(occupations_dictionary[occupation])
-        top_10_occupations_percentages.append(str(round(100*(occupations_dictionary[keylist_occupations[i]]/total_number_of_certified_occupants), 1))+'%')
+        top_10_occupations_percentages.append(str(round(100*(occupations_dictionary[keylist_occupations[occupation]]/total_number_of_certified_occupants), 1))+'%')
 if len(keylist_states) > 10:
     for i in range(10):
         top_10_states.append(keylist_states[i])
