@@ -63,13 +63,13 @@ else:
         top_10_occupations_number_of_certified_applicants.append(state_dictionary[state])
         top_10_occupations_percentages.append(str(round(100*(state_dictionary[state]/total_number_of_certified_occupants), 1))+'%')
 
-f= open("output/top_10_occupations.txt","w+")
+f= open(sys.argv[2], "w+")
 f.write("TOP_OCCUPATIONS;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
 for i in range(len(top_10_occupations)):
     f.write("%s;%d;%s\n" % (top_10_occupations[i], top_10_occupations_number_of_certified_applicants[i], top_10_occupations_percentages[i]))
 f.close()
 
-f2 = open("output/top_10_states.txt", "w+")
+f2 = open(sys.argv[3], "w+")
 f2.write("TOP_STATES;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
 for i in range(len(top_10_states)):
     f2.write("%s;%d;%s\n" % (top_10_states[i], top_10_states_number_of_certified_applicants[i], top_10_states_percentages[i]))
