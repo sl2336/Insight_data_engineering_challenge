@@ -20,9 +20,9 @@ with open(fname) as csvfile:
     reader = csv.DictReader(csvfile, delimiter=';')
     header = reader.next()
     if "STATUS" in header:
-        header = ['STATUS', 'LCA_CASE_SOC_NAME', 'LCA_CASE_EMPLOYER_STATE']
+        header = ['STATUS', 'LCA_CASE_SOC_NAME', 'WORKSITE_STATE']
     else:
-        header = ['CASE_STATUS', 'SOC_NAME', 'EMPLOYER_STATE']
+        header = ['CASE_STATUS', 'SOC_NAME', 'WORKSITE_STATE']
     for row in reader:
         if row[header[0]] == 'CERTIFIED':
             total_number_of_certified_occupants += 1
