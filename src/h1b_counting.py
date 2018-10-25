@@ -65,8 +65,8 @@ if len(keylist_states) > 10:
 else:
     for state in keylist_states:
         top_10_states.append(state)
-        top_10_occupations_number_of_certified_applicants.append(state_dictionary[state])
-        top_10_occupations_percentages.append(str(round(100*(state_dictionary[state]/total_number_of_certified_occupants), 1))+'%')
+        top_10_states_number_of_certified_applicants.append(state_dictionary[state])
+        top_10_states_percentages.append(str(round(100*(state_dictionary[state]/total_number_of_certified_occupants), 1))+'%')
 
 f= open(sys.argv[2], "w+")
 f.write("TOP_OCCUPATIONS;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
