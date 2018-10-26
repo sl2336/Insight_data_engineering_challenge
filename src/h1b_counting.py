@@ -28,10 +28,11 @@ def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_s
     state_dictionary = {} #stores the number of certified applicants for each state
     total_number_of_certified_occupants = 0.0 
     fname = path_to_csvfile
-    
+ 
     with open(fname) as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         header = reader.fieldnames
+        if "WORKSITE_STATE" not in header: raise ValueError('csv file does not have right header!')
         if "STATUS" in header:
             #Files provided by Department of Labor uses these header names
             header = ['STATUS', 'LCA_CASE_SOC_NAME', 'WORKSITE_STATE']
@@ -91,6 +92,7 @@ def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_s
             top_10_states_number_of_certified_applicants.append(state_dictionary[state])
             top_10_states_percentages.append(str(round(100*(state_dictionary[state]/total_number_of_certified_occupants), 1))+'%')
     #write to top_10_occupations.txt
+    #if the top_10_occupations.txt doesn't exist, we will create it
     f= open(path_to_occupationsfile, "w+")
     f.write("TOP_OCCUPATIONS;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
     for i in range(len(top_10_occupations)):
@@ -98,6 +100,7 @@ def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_s
     f.close()
     
     #write to top_10_state.txt
+    #if the top_10_states.txt doesn't exist, we will create it
     f2 = open(path_to_statesfile, "w+")
     f2.write("TOP_STATES;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
     for i in range(len(top_10_states)):
