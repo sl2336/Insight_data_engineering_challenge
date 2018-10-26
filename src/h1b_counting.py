@@ -2,7 +2,7 @@
 import csv
 import sys
 
-def calculate_h1b_statistics(csvfile, occupationsfile, statesfile):
+def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_statesfile):
     '''
     Function to calculate the top 10 states and occupations, their number of certified h1b visa applicants,
     and what percentage of the total number of certified h1b visa applicants they make up and write the results
@@ -11,7 +11,7 @@ def calculate_h1b_statistics(csvfile, occupationsfile, statesfile):
     occupations_dictionary = {} #stores the number of certified applicants for each occupation
     state_dictionary = {} #stores the number of certified applicants for each state
     total_number_of_certified_occupants = 0.0 #stores the number of certified applicants
-    fname = sys.argv[1] #path to inputfile
+    fname = path_to_csvfile #path to inputfile
     
     def sort_by_value_for_occupations_dictionary(key):
         '''
@@ -88,14 +88,14 @@ def calculate_h1b_statistics(csvfile, occupationsfile, statesfile):
             top_10_states_number_of_certified_applicants.append(state_dictionary[state])
             top_10_states_percentages.append(str(round(100*(state_dictionary[state]/total_number_of_certified_occupants), 1))+'%')
     #write to top_10_occupations.txt
-    f= open(sys.argv[2], "w+")
+    f= open(path_to_occupationsfile, "w+")
     f.write("TOP_OCCUPATIONS;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
     for i in range(len(top_10_occupations)):
         f.write("%s;%d;%s\n" % (top_10_occupations[i], top_10_occupations_number_of_certified_applicants[i], top_10_occupations_percentages[i]))
     f.close()
     
     #write to top_10_state.txt
-    f2 = open(sys.argv[3], "w+")
+    f2 = open(path_to_statesfile, "w+")
     f2.write("TOP_STATES;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE\n")
     for i in range(len(top_10_states)):
         f2.write("%s;%d;%s\n" % (top_10_states[i], top_10_states_number_of_certified_applicants[i], top_10_states_percentages[i]))
