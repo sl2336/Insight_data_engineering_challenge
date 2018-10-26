@@ -2,29 +2,30 @@
 import csv
 import sys
 
+
+def sort_by_value_for_occupations_dictionary(key):
+    '''
+    Sorting function SPECIFICALLY for occupations_dictionary.
+    Sorts by number of certified applicants.
+    '''
+    return occupations_dictionary[key]
+
+def sort_by_value_for_state_dictionary(key):
+    '''
+    Sorting function SPECIFICALLY for states_dictionary.
+    Sorts by number of certified applicants first, then alphabetically by state.
+    '''
+    return (state_dictionary[key], key)
+
+
 def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_statesfile):
     '''
-    Function to calculate the top 10 states and occupations, their number of certified h1b visa applicants,
-    and what percentage of the total number of certified h1b visa applicants they make up and write the results
-    into two text files(occupationsfile and statesfile).
+    Calculates h1b Visa statistics and write them to text files(details on Github).
     '''
     occupations_dictionary = {} #stores the number of certified applicants for each occupation
     state_dictionary = {} #stores the number of certified applicants for each state
-    total_number_of_certified_occupants = 0.0 #stores the number of certified applicants
-    fname = path_to_csvfile #path to inputfile
-    
-    def sort_by_value_for_occupations_dictionary(key):
-        '''
-        Sorting function SPECIFICALLY for occupations_dictionary
-        Sorts by number of certified applicants
-        '''
-        return occupations_dictionary[key]
-    def sort_by_value_for_state_dictionary(key):
-        '''
-        Sorting function SPECIFICALLY for states_dictionary
-        Sorts by number of certified applicants first, then alphabetically by state.
-        '''
-        return (state_dictionary[key], key)
+    total_number_of_certified_occupants = 0.0 
+    fname = path_to_csvfile
     
     with open(fname) as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
