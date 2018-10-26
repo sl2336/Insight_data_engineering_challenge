@@ -3,19 +3,21 @@ import csv
 import sys
 
 
-def sort_by_value_for_occupations_dictionary(key):
+def sort_by_value(dictionary):
     '''
-    Sorting function SPECIFICALLY for occupations_dictionary.
-    Sorts by number of certified applicants.
+    returns function to sort dictionary by value
     '''
-    return occupations_dictionary[key]
+    def sort(key):
+        return dictionary[key]
+    return sort
 
-def sort_by_value_for_state_dictionary(key):
+def sort_by_value_and_alphabetically(dictionary):
     '''
-    Sorting function SPECIFICALLY for states_dictionary.
-    Sorts by number of certified applicants first, then alphabetically by state.
+    returns function to sort dictionary by value and then by key
     '''
-    return (state_dictionary[key], key)
+    def sort(key):
+        return (dictionary[key], key)
+    return sort
 
 
 def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_statesfile):
@@ -51,11 +53,11 @@ def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_s
                     state_dictionary[row[header[2]]] += 1
     keylist_occupations = occupations_dictionary.keys() #list of keys i.e list of unique occupations
     #sort keys by number of applicants first, then alphabetically
-    keylist_occupations.sort(reverse=True, key=sort_by_value_for_occupations_dictionary)
+    keylist_occupations.sort(reverse=True, key=sort_by_value(occupations_dictionary))
     
     keylist_states = state_dictionary.keys() #list of keys i.e list of unique states
     #sort keys by number of applicants first, then alphabetically
-    keylist_states.sort(reverse = True, key=sort_by_value_for_state_dictionary)
+    keylist_states.sort(reverse = True, key=sort_by_value_and_alphabetically(state_dictionary))
     
     top_10_occupations = [] #top 10 occupations with the most number of certified h1b visa applicants
     top_10_occupations_number_of_certified_applicants = [] #the number of certified applicants for each top 10 occupation
