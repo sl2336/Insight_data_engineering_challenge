@@ -40,7 +40,7 @@ After sorting the list of keys for occupations and states, we will then the 10 l
 
 Lastly, we just iterate through the 6 arrays we made(3 for occupations and 3 for states) and write each entry of each array into their respective files. 
 
-Technical Notes:
+**Technical Notes:**
 O(N) storage, where N is the total number of unique occupations or states(whichever is larger)
 Runtime is O(nlogn): which comes from sorting the dictionary keys
 
