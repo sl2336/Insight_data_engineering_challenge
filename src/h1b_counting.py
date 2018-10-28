@@ -2,7 +2,6 @@
 import csv
 import sys
 
-
 def sort_by_value(dictionary):
     '''
     returns function to sort dictionary by value
@@ -28,7 +27,8 @@ def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_s
     state_dictionary = {} #stores the number of certified applicants for each state
     total_number_of_certified_occupants = 0.0 
     fname = path_to_csvfile
- 
+    
+    #read in csv file
     with open(fname) as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         header = reader.fieldnames
@@ -52,14 +52,16 @@ def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_s
                     state_dictionary[row[header[2]]] = 1
                 else:
                     state_dictionary[row[header[2]]] += 1
+                    
+    #sort statistics
     keylist_occupations = occupations_dictionary.keys() #list of keys i.e list of unique occupations
     #sort keys by number of applicants first, then alphabetically
     keylist_occupations.sort(reverse=True, key=sort_by_value(occupations_dictionary))
-    
     keylist_states = state_dictionary.keys() #list of keys i.e list of unique states
     #sort keys by number of applicants first, then alphabetically
     keylist_states.sort(reverse = True, key=sort_by_value_and_alphabetically(state_dictionary))
     
+    #put them in appropriate arrays
     top_10_occupations = [] #top 10 occupations with the most number of certified h1b visa applicants
     top_10_occupations_number_of_certified_applicants = [] #the number of certified applicants for each top 10 occupation
     top_10_occupations_percentages = [] #percentage each top 10 occupation make up of all certified h1b visa applicants
@@ -91,6 +93,7 @@ def calculate_h1b_statistics(path_to_csvfile, path_to_occupationsfile, path_to_s
             top_10_states.append(state)
             top_10_states_number_of_certified_applicants.append(state_dictionary[state])
             top_10_states_percentages.append(str(round(100*(state_dictionary[state]/total_number_of_certified_occupants), 1))+'%')
+            
     #write to top_10_occupations.txt
     #if the top_10_occupations.txt doesn't exist, we will create it
     f= open(path_to_occupationsfile, "w+")
